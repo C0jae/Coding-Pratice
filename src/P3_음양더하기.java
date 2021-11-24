@@ -1,4 +1,4 @@
-public class P2_음양더하기 {
+public class P3_음양더하기 {
 
     public static int solution(int[] absolutes, boolean[] signs) {
         int answer = 0;

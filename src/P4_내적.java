@@ -1,4 +1,4 @@
-public class P3_내적 {
+public class P4_내적 {
     
     public static int solution(int[] a, int[] b) {
         int result = 0;
