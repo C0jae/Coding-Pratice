@@ -1,5 +1,3 @@
-# def check(x, y):
-
 # 방문한 칸의 수    
 cnt = 0
 
@@ -61,6 +59,11 @@ while True:
                 print("이동좌표 : ", a, b)
                 print("======================")
                 
+                if (d == 0): d = 2
+                elif (d == 2): d = 0
+                elif (d == 1): d = 3
+                elif (d == 3): d = 1
+                
                 continue
             
             # 4방향 모두 기본칸이거나 바다일 경우 + 뒤로 이동 불가능할 경우 종료
@@ -82,7 +85,5 @@ while True:
             
             if (time == 6):
                 break
-            
-            
         
-print(cnt)
+print("최종 방문한 칸의 갯수 : ", cnt)
