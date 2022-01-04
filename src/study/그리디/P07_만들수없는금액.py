@@ -9,6 +9,7 @@ result = 1
 coin.sort()
 
 for i in coin:
+    # 왜 result가 이 조건을 만족할때가 정답인지 모르겠음
     if i > result:
         break
     
