@@ -31,22 +31,28 @@ def turn_90(key):
 
 
 # 자물쇠 부분이 모두 1인지 확인(a = 0부터 len(big_lock) - 1 까지)
-def success(key, big_lock, a):
+def success(key, big_lock, a, b):
     n = len(big_lock)
     m = len(key)
     
     # 자물쇠 + 열쇠를 나타내는 sum_lock 생성
     sum_lock = [[0] * n for _ in range(n)]
     
+    # sum_lock = big_lock
+    for i in range(n):
+        for j in range(n):
+            sum_lock[i][j] = big_lock[i][j]
+    
+    # sum_lock + key
     for i in range(m):
         for j in range(m):
-            sum_lock[a + i][a + j] += key[i][j]
-    
+            sum_lock[a + i][b + j] += key[i][j]
+        
     # sum_lock의 자물쇠 위치 부분이 전부 1인지 확인
-    for i in range(n / 3):
-        for j in range(n / 3):
+    for i in range(n // 3):
+        for j in range(n // 3):
             # 1이라면 다음 항목 검사
-            if sum_lock[i + (n / 3)][j + (n / 3)] == 1:
+            if sum_lock[i + (n // 3)][j + (n // 3)] == 1:
                 continue
             # 하나라도 1이 아니라면 false 리턴
             else:
@@ -70,11 +76,30 @@ def solution(key, lock):
         for j in range(n):
             big_lock[i + n][j + n] = lock[i][j]
     
+    # key를 이동하면서 lock과 맞춰보기
+    # 세로이동     
+    for i in range(1, 2 * n):
+        # 가로이동
+        for j in range(1, 2 * n):
+            # 4방향 회전
+            for _ in range(4):
+                # 맞물릴경우 true 리턴
+                if success(key, big_lock, j, i) == True:
+                    return True
+                
+                # 다를경우 90도 회전
+                else:
+                    key = turn_90(key)
     
-    return 0
+    # true가 리턴되지 않았을경우(맞는곳이 없을경우) false 리턴
+    return False
 
 
 key = [[0, 0, 0], [1, 0, 0], [0, 1, 1]]
 lock = [[1, 1, 1], [1, 1, 0], [1, 0, 1]]
 
-print(solution(key, lock))
+if solution(key, lock) == True:
+    print("true")
+
+else:
+    print("false")
