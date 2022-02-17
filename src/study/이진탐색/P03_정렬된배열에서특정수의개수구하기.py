@@ -40,7 +40,7 @@ def last(array, x, start, end):
 
 
 # 답 구하기
-def solution(array, x, start, end):
+def solution(array, x):
     n = len(array)
     
     # 해당값의 첫번째 인덱스
@@ -68,16 +68,3 @@ if cnt == 0:
 
 else:
     print(cnt)
-    
-
-def solution(array, x):
-    count = 0
-    
-    for i in array:
-        if i > x:
-            break
-        
-        elif i == x:
-            count += 1
-    
-    return count
