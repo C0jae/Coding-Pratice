@@ -1,0 +1,70 @@
+/* body {
+    margin: 0;
+    height: 2000px;
+    background-color: black;
+}
+
+section {
+    height: 100vh;
+
+    background: url(https://assets.nflxext.com/ffe/siteui/vlv3/eb482c64-e879-4e88-9ddc-d839cb7d1232/df2916c4-fbc7-4814-8dc9-bf307b678808/KR-ko-20220131-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+}
+
+section::before {
+    content: '';
+    background: linear-gradient(to top, black, transparent);
+    position: absolute;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+}
+
+section > h1 {
+    color: white;
+    font-size: 5em;
+    position: absolute;
+    top: 150px;
+    left: 100px;
+    font-family: sans-serif;
+} */
+
+body {
+    margin: 0;
+    background-color: black;
+    height: 2000px;
+}
+
+section {
+    background: url(https://assets.nflxext.com/ffe/siteui/vlv3/eb482c64-e879-4e88-9ddc-d839cb7d1232/df2916c4-fbc7-4814-8dc9-bf307b678808/KR-ko-20220131-popsignuptwoweeks-perspective_alpha_website_large.jpg);
+    
+    height: 100vh;
+}
+
+section::before {
+    content: '';
+    background: linear-gradient(to top, black, transparent);
+
+    position: absolute;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+}
+
+.title {
+    position: absolute;
+    top: 200px;
+    width: max-content;
+
+    margin-left: 70px;
+    margin-right: 70px;
+
+    height: auto;
+}
+
+.title > h1 {
+    color: white;
+    font-size: 4em;
+    font-family: sans-serif;
+}
