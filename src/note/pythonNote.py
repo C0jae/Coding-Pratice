@@ -1,12 +1,10 @@
-# 방향정보
-l = int(input("방향 전환 횟수 : "))
+t = []
 
-# 방향정보 리스트
-direction = []
+t.append((0,1))
+t.append((1,1))
+t.append((1,1))
+t.append((1,1))
 
-# 방향정보 입력
-for _ in range(l):
-    x, c = input("초, 방향 정보 입력 : ").split()
-    direction.append((int(x), c))
+print(t)
 
-print(direction[0][0])
+print(t[0][0])
