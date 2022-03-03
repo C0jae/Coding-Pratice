@@ -62,7 +62,8 @@ while True:
             if union[i][j] == -1:   # 연합 소속이 아니라면 주변 국가 탐색
                 check(i, j, index)  # 하나의 연합그룹 생성
                 index += 1          # 다음 연합그룹 번호를 위한 index + 1
-            
+    
+    # 더 이상 연합할 국가가 없을경우(모든 국가의 index가 -1)
     if index == n * n:
         break
         
