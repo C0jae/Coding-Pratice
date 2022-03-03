@@ -18,6 +18,8 @@ for _ in range(m):
 def solution(c):
     q = []
     heapq.heappush(q, (0, c))
+    distance[c] = 0
+    
     while q:
         dist, now = heapq.heappop(q)
         if distance[now] < dist:

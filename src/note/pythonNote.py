@@ -1,10 +1,15 @@
-t = []
+from collections import deque
 
-t.append((0,1))
-t.append((1,1))
-t.append((1,1))
-t.append((1,1))
 
-print(t)
+q = deque()
 
-print(t[0][0])
+q.append((1, 2))
+q.append((3, 4))
+q.append((3, 5))
+
+print(q)
+
+if (1, 2) not in q:
+    print("T")
+else:
+    print("F")
