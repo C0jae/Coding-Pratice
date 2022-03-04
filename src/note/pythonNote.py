@@ -1,15 +1,7 @@
-from collections import deque
+m = int(input("버스 수 : "))    # 버스 개수 입력
 
-
-q = deque()
-
-q.append((1, 2))
-q.append((3, 4))
-q.append((3, 5))
-
-print(q)
-
-if (1, 2) not in q:
-    print("T")
-else:
-    print("F")
+bus = []
+for _ in range(m):
+    bus.append(list(map(int, input("버스 정보 입력 : ").split())))
+    
+print(len(bus[0]))
