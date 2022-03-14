@@ -1,3 +1,10 @@
-a = [0] * 4
+a = "ag?#"
 
-print(a)
+c = a.count("?")
+queries = ["fro?w", "????o", "fr???", "fro???", "pro?"]
+
+print(a[1:])
+print(queries[0][:1])
+
+print(queries[0][-1])
+print(queries[0][:2 + 1])
