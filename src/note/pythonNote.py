@@ -1,4 +1,6 @@
-a = "ag?#"
+a = [[1, 2, 3, 4], [1, 1, 1, 0]]
 
-c = a.count("?")
-queries = ["fro?w", "????o", "fr???", "fro???", "pro?"]
+if 0 in a[1]:
+    print("y")
+else:
+    print("n")
