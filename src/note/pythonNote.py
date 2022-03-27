@@ -1,6 +1,5 @@
-a = [[1, 2, 3, 4], [1, 1, 1, 0]]
+graph = []
+# graph.append(map(list(int, input("각 칸의 비용 : ").split())))
+graph.append(list(map(int, input().split())))
 
-if 0 in a[1]:
-    print("y")
-else:
-    print("n")
+print(graph)
