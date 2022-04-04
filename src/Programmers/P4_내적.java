@@ -1,3 +1,4 @@
+package Programmers;
 public class P4_내적 {
     
     public static int solution(int[] a, int[] b) {

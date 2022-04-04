@@ -1,3 +1,4 @@
+package Programmers;
 import java.util.Arrays;
 
 public class P14_예산 {

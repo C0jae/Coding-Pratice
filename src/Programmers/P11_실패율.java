@@ -1,3 +1,4 @@
+package Programmers;
 import java.util.*;
 
 public class P11_실패율 {
@@ -6,7 +7,7 @@ public class P11_실패율 {
         int[] answer = new int[N];
         int demo = stages.length;
         int mole;
-        double[] fail = new double[N];
+        // double[] fail = new double[N];
 
         Arrays.sort(stages);
 
@@ -22,7 +23,7 @@ public class P11_실패율 {
         }
 
 
-        int[] result = new int[N];
+        // int[] result = new int[N];
 
         for (int i = 0; i < N; i++) {
             for (int j = 1; j < N; j++) {

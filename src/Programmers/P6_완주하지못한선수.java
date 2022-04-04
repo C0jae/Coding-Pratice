@@ -1,3 +1,4 @@
+package Programmers;
 import java.util.Arrays;
 
 public class P6_완주하지못한선수 {

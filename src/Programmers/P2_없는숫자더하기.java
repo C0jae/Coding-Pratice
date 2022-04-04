@@ -1,3 +1,4 @@
+package Programmers;
 public class P2_없는숫자더하기 {
 
     public static int solution(int[] numbers) {

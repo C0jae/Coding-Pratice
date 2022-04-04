@@ -1,3 +1,4 @@
+package Programmers;
 public class P12_약수와개수의덧셈 {
 
     public static int solution(int left, int right) {
