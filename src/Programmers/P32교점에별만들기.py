@@ -11,7 +11,7 @@ def solution(line):
             b = line[i][1]
             e = line[i][2]
             
-            직선2
+            #직선2
             c = line[j][0]
             d = line[j][1]
             f = line[j][2]
