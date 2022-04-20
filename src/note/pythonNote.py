@@ -1,2 +1,3 @@
-a = ([0] * 4 for _ in range(2))
-print(a)
+d = [(1,2)]
+d.append((3,4))
+print(d)
