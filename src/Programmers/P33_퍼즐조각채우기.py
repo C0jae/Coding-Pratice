@@ -1,3 +1,6 @@
+from audioop import minmax
+from collections import deque
+
 
 # 4방향 탐색(i값, j값, 테이블 종류, 빈칸표시, 빈칸 좌표)
 def direction(a, b, data, x, d):
@@ -7,46 +10,128 @@ def direction(a, b, data, x, d):
     dx = [0, 0, -1, 1]
     dy = [1, -1, 0, 0]
     
-    d.append((a, b))
+    d.append([a, b])
     
-    for i in range(4):
-        nx = dx[i] + a
-        ny = dy[i] + b
+    dq = deque()
+    dq.append([a, b])
+    
+    data[a][b] = 2
+    
+    while dq:
+        a, b = dq.popleft()
         
-        if data[nx][ny] == x:
-            d.append((nx, ny))
+        for i in range(4):
+            nx = dx[i] + a
+            ny = dy[i] + b
             
-            direction(nx, ny, data, x)
+            if nx >= 0 and ny >= 0 and nx < len(data) and ny < len(data) and data[nx][ny] == x:
+                d.append([nx, ny])
+                dq.append([nx, ny])
+                
+                data[nx][ny] = 2
         
     return d
 
 # 빈공간 찾기 함수 game_board
 def search_empty(game_board):
-    result = []
     l = len(game_board)
+    empty = []
     
     for i in range(l):
         for j in range(l):
             d = []
             direction(i, j, game_board, 0, d)
-                
+            
+            if len(d) > 0:
+                empty.append(d)
     
-    return result
+    return empty
 
 # 블록찾기 함수 table
-
-# 시작지점 좌표 (0, 0) 기준으로 변경
-
-# 블럭 회전
-
-def solution(game_board, table):
-    answer = -1
-    
-    empty = []
+def search_block(table):
+    l = len(table)
     block = []
     
-    return answer
+    for i in range(l):
+        for j in range(l):
+            d = []
+            direction(i, j, table, 1, d)
+            
+            if len(d) > 0:
+                block.append(d)
+    
+    return block
+
+# 시작지점 좌표 (0, 0) 기준으로 변경
+def reset(data):
+    for i in range(len(data)):
+        a = data[i][0][0]   # 도형 하나의 첫 기준 좌표 a (a, b)
+        b = data[i][0][1]   # 도형 하나의 첫 기준 좌표 b (a, b)
+        
+        for j in range(len(data[i])):   # 도형의 기준을 (0, 0)으로 변동하기(이동)
+            data[i][j][0] -= a
+            data[i][j][1] -= b
+            
+        
+    
+    return data
+
+# 블럭 회전
+def rotation(oneBlock):
+    # oneBlock[0][0] = oneBlock[0][1]          x좌표 = y좌표
+    # ondBlock[0][1] = r - 1 - oneBlock[0][0]  y좌표 = 배열 길이 - 1 - x
+    
+    maxX = int(-1e9)
+    minX = int(1e9)
+    maxY = int(-1e9)
+    minY = int(1e9)
+    for i in range(len(oneBlock)):
+        maxX = max(maxX, oneBlock[i][0])
+        minX = min(minX, oneBlock[i][0])
+        maxY = max(maxY, oneBlock[i][1])
+        minY = min(minY, oneBlock[i][1])
+    
+    r = max((maxX - minX + 1), (maxY - minY + 1))
+    
+    for i in range(len(oneBlock)):
+        oneBlock[i][0] = oneBlock[i][1]
+        oneBlock[i][1] = r - 1 - oneBlock[i][0]
+        
+    return oneBlock
+
+def solution(game_board, table):
+    result = []
+    
+    empty = search_empty(game_board)    # 빈칸이 위치한 좌표
+    block = search_block(table)         # 블록이 위치한 좌표
+    
+    empty = reset(empty)    # 모든 빈칸 영역의 기준칸 좌표가 (0, 0)으로 오도록 좌표 조정
+    block = reset(block)    # 모든 블록의 기준칸 좌표가 (0, 0)으로 오도록 좌표 조정
+    
+    print(empty)
+    print(block)
+    print("---------------")
+    
+    for i in range(len(empty)):
+        for j in range(len(block)):
+            print(i, j, empty[i], block[j])
+            if empty[i] == block[j]:
+                print("1", empty[i])
+                result.append(empty[i])
+                break
+            else:
+                for _ in range(3):
+                    block[j] = rotation(block[j])
+                    if empty[i] == block[j]:
+                        print("2", empty[i])
+                        result.append(empty[i])
+                        break
+                    
+    
+    return result
 
 
 game_board = [[1,1,0,0,1,0],[0,0,1,0,1,0],[0,1,1,0,0,1],[1,1,0,1,1,1],[1,0,0,0,1,0],[0,1,1,1,0,0]]
 table = [[1,0,0,1,1,0],[1,0,1,0,1,0],[0,1,1,0,1,1],[0,0,1,0,0,0],[1,1,0,1,1,0],[0,1,0,0,0,0]]
+
+print(solution(game_board, table))
