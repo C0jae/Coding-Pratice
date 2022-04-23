@@ -1,4 +1,3 @@
-from audioop import minmax
 from collections import deque
 
 
@@ -72,32 +71,27 @@ def reset(data):
             data[i][j][0] -= a
             data[i][j][1] -= b
             
-        
-    
     return data
 
 # 블럭 회전
 def rotation(oneBlock):
-    # oneBlock[0][0] = oneBlock[0][1]          x좌표 = y좌표
-    # ondBlock[0][1] = r - 1 - oneBlock[0][0]  y좌표 = 배열 길이 - 1 - x
+    n = len(oneBlock)
+    m = len(oneBlock[0])
+    rot = [[0] * n for _ in range(m)]
+
+    for i in range(n):
+        for j in range(m):
+            rot[j][n - 1 - i] = oneBlock[i][j]
     
-    maxX = int(-1e9)
-    minX = int(1e9)
-    maxY = int(-1e9)
-    minY = int(1e9)
-    for i in range(len(oneBlock)):
-        maxX = max(maxX, oneBlock[i][0])
-        minX = min(minX, oneBlock[i][0])
-        maxY = max(maxY, oneBlock[i][1])
-        minY = min(minY, oneBlock[i][1])
+    rot.sort()
+    a = rot[0][0]
+    b = rot[0][1]
+    for i in range(m):
+        rot[i][0] -= a
+        rot[i][1] -= b
     
-    r = max((maxX - minX + 1), (maxY - minY + 1))
-    
-    for i in range(len(oneBlock)):
-        oneBlock[i][0] = oneBlock[i][1]
-        oneBlock[i][1] = r - 1 - oneBlock[i][0]
-        
-    return oneBlock
+    print(rot)
+    return rot
 
 def solution(game_board, table):
     result = []
@@ -108,27 +102,30 @@ def solution(game_board, table):
     empty = reset(empty)    # 모든 빈칸 영역의 기준칸 좌표가 (0, 0)으로 오도록 좌표 조정
     block = reset(block)    # 모든 블록의 기준칸 좌표가 (0, 0)으로 오도록 좌표 조정
     
-    print(empty)
-    print(block)
-    print("---------------")
+    # print(empty)
+    # print(block)
+    # print("---------------")
     
     for i in range(len(empty)):
         for j in range(len(block)):
-            print(i, j, empty[i], block[j])
+            # print(i, j, empty[i], block[j])
             if empty[i] == block[j]:
-                print("1", empty[i])
+                # print("1", empty[i])
                 result.append(empty[i])
                 break
             else:
-                for _ in range(3):
+                for k in range(3):
                     block[j] = rotation(block[j])
+                    # print("empty :", empty[i], ":", " rot",k,":",block[j])
                     if empty[i] == block[j]:
-                        print("2", empty[i])
+                        # print("2", empty[i])
                         result.append(empty[i])
                         break
-                    
-    
-    return result
+    answer = 0
+    for i in range(len(result)):
+        answer += len(result[i])
+                        
+    return answer
 
 
 game_board = [[1,1,0,0,1,0],[0,0,1,0,1,0],[0,1,1,0,0,1],[1,1,0,1,1,1],[1,0,0,0,1,0],[0,1,1,1,0,0]]
