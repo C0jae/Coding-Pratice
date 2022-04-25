@@ -17,22 +17,26 @@ def union_parent(a, b, parent):
 def solution(n, wires):
     result = []
     
+    # 경로를 하나씩 끊어보기 위한 반복문
     for i in range(len(wires)):
         parent = [0] * (n + 1)
         for k in range(n + 1):
             parent[k] = k
-            
+
+        # 하나의 경로는 무시하기(= 끊기)
         for j in range(len(wires)):
             if i == j:
                 continue
                 
             union_parent(wires[j][0], wires[j][1], parent)
         
+        # print(i, parent)
         a = parent.count(1)
         b = len(parent) - a - 1
         
         result.append(abs(a - b))
-        
+    
+    # print(result)
     return min(result)
 
 n = 9
