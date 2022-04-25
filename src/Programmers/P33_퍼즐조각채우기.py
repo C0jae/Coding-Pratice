@@ -75,22 +75,17 @@ def reset(data):
 
 # 블럭 회전
 def rotation(oneBlock):
-    n = len(oneBlock)
-    m = len(oneBlock[0])
-    rot = [[0] * n for _ in range(m)]
+    n = max(len(oneBlock), len(oneBlock[0]))
+    rot = [[0] * n for _ in range(n)]
 
     for i in range(n):
-        for j in range(m):
+        for j in range(n):
             rot[j][n - 1 - i] = oneBlock[i][j]
     
-    rot.sort()
-    a = rot[0][0]
-    b = rot[0][1]
-    for i in range(m):
-        rot[i][0] -= a
-        rot[i][1] -= b
-    
+    a = 0
+    b = n - 1
     print(rot)
+    
     return rot
 
 def solution(game_board, table):
